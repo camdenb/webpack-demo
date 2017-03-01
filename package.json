@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/camdenb/webpack-demo/issues"
   },
-  "homepage": "https://github.com/camdenb/webpack-demo#readme"
+  "homepage": "https://github.com/camdenb/webpack-demo#readme",
+  "devDependencies": {
+    "html-webpack-plugin": "^2.28.0",
+    "webpack": "^2.2.1"
+  }
 }

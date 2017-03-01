@@ -1,0 +1,6 @@
+{
+  "extends": "./.global-eslintrc",
+  "rules": {    
+    "indent": ["warn", 4]
+  }
+}
