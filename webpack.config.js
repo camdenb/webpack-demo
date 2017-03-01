@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -21,6 +22,44 @@ const commonConfig = {
     ],
 };
 
-module.exports = function(env) {
+function productionConfig() {
     return commonConfig;
+}
+
+function developmentConfig() {
+    const config = {
+        devServer: {
+            historyApiFallback: true,
+            hotOnly: true,
+            stats: 'errors-only',
+            host: process.env.HOST,
+            port: process.env.PORT,
+
+            overlay: {
+                errors: true,
+                warnings: true,
+            },
+        },
+        plugins: [
+            new webpack.HotModuleReplacementPlugin(),
+            new webpack.NamedModulesPlugin(),
+        ],
+    };
+
+    return Object.assign(
+        {},
+        commonConfig,
+        config,
+        {
+            plugins: commonConfig.plugins.concat(config.plugins),
+        }
+    );
+}
+
+module.exports = function(env) {
+    if (env === 'production') {
+        return productionConfig();
+    }
+
+    return developmentConfig();
 };
